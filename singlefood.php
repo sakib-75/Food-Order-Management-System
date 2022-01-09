@@ -34,18 +34,14 @@ session_start();
 
 <body>
 
-
-
     <header>
         <div class="container">
             <a class="logo" href="index.php"><img src="images/logo-white.png" alt="Logo"></a>
-
             <div class="right-area">
-                <h6><a class="plr-20 color-white btn-fill-primary" href="tel:+8801914603437 "> Call: +8801914603437</a></h6>
+                <h6><a class="plr-20 color-white btn-fill-primary" href="tel:+8801914603437 "> Call: +8801914603437</a>
+                </h6>
             </div><!-- right-area -->
-
             <a class="menu-nav-icon" data-menu="#main-menu" href="#"><i class="ion-navicon"></i></a>
-
             <ul class="main-menu font-mountainsre" id="main-menu">
                 <li id="item"><a href="index.php">Home</a></li>
                 <li id="item"><a href="fullmenu.php">Menu</a></li>
@@ -54,7 +50,6 @@ session_start();
                 <li id="item"><a href="about_us.php">About us</a></li>
 
             </ul>
-
             <div class="clearfix"></div>
         </div><!-- container -->
     </header>
@@ -65,10 +60,8 @@ session_start();
         <div class="container h-100">
             <div class="dplay-tbl">
                 <div class="dplay-tbl-cell center-text color-white pt-90">
-
                     <h4 style="font-family:Lucida Console">Food Profile</h4>
                     <h3 style="  font-family:Segoe Script;"><b><?php  echo $_GET['productname']; ?></b></h3>
-
                 </div><!-- dplay-tbl-cell -->
             </div><!-- dplay-tbl -->
         </div><!-- container -->
@@ -83,162 +76,185 @@ session_start();
                 <br>
                 <ul class="list-group categories-list">
                     <?php	
-			                    $sql="select * from category ";
-			                    $query=$mysqli->query($sql);
-			                    while($row=$query->fetch_array()){
-									 $catname=$row['catname'];?>
+			        $sql="select * from category ";
+			        $query=$mysqli->query($sql);
+			        while($row=$query->fetch_array()){
+						$catname=$row['catname'];?>
 
-                    <li style="font-size:15px;" id="hov" class="list-group-item"><a href="allfood.php?p_id=<?php echo $catname;?>">
+                    <li style="font-size:15px;" id="hov" class="list-group-item">
+                        <a href="allfood.php?p_id=<?php echo $catname;?>">
                             <h5><b><?php echo $row['catname'] ?></b></h5>
-                        </a></li>
-
+                        </a>
+                    </li>
                     <?php }?>
                 </ul>
             </div>
             <div class="col-md-9">
                 <!-- <h3>Posts</h3> -->
                 <?php 
-						include_once 'connection.php';
+					include_once 'connection.php';
 
-                        if (isset($_GET['productname'])) {
+                    if (isset($_GET['productname'])) {
 							
-		                    $the_post_id=$_GET['productname'];
-		                    $post_edit_query = "SELECT * FROM product WHERE productname = '$the_post_id' ";
-		                    $post_edit_query_result = mysqli_query($mysqli,$post_edit_query);
-		                    if (!$post_edit_query_result) {
-		                           	die("view_add_query_result failed ".mysqli_error($mysqli));
-		                    }
+		                $the_post_id=$_GET['productname'];
+		                $post_edit_query = "SELECT * FROM product WHERE productname = '$the_post_id' ";
+		                $post_edit_query_result = mysqli_query($mysqli,$post_edit_query);
+		                if (!$post_edit_query_result) {
+		                    die("view_add_query_result failed ".mysqli_error($mysqli));
+		                }
 
-		                    while ($row=mysqli_fetch_assoc($post_edit_query_result)) {
+		                while ($row=mysqli_fetch_assoc($post_edit_query_result)) {
 								
-			                    
-			                    $foodid=$row['productid'];
-                                $foodname=$row['productname'];
-								$category=$row['categoryname'];
-								$price=$row['price'];
-								$image=$row['photo'];
-								$quantity=$row['quantity'];
-								$offer=$row['offer'];
-                                $offer_title=$row['offer_title'];
+			                $foodid=$row['productid'];
+                            $foodname=$row['productname'];
+							$category=$row['categoryname'];
+							$price=$row['price'];
+							$image=$row['photo'];
+							$quantity=$row['quantity'];
+							$offer=$row['offer'];
+                            $offer_title=$row['offer_title'];
 								
-								if($quantity>0){
-									$availability="Available";
-									$style2="success";
+							if($quantity>0){
+								$availability="Available";
+								$style2="success";
 									
-								}else{
-									$availability="Not Available";
-									$style2="danger";
-								}
+							}else{
+								$availability="Not Available";
+								$style2="danger";
+							}
 								
-								
-								if($offer>0){
-									$badge='<img style="float: right !important;height:220px;width:220px"src="images/offer.jpg" alt="Mobile">';
+							if($offer>0){
+								$badge='<img style="float: right !important;height:150px;width:150px"src="images/offer.jpg" alt="Mobile">';
 							        
-									$cut=$price*($offer/100);
-							     	$final_price=($price-$cut);
-									$price_style =' &#2547; <b style="color:red;text-decoration: line-through;">'.$price.'</b> is now';
-								}
-								else{
-									$badge="";
-									$price_style="";
-							     	$final_price=$price;
-								}
+								$cut=$price*($offer/100);
+							    $final_price=($price-$cut);
+								$price_style =' &#2547; <b style="color:red;text-decoration: line-through;">'.$price.'</b> is now';
+							}
+							else{
+								$badge="";
+								$price_style="";
+							    $final_price=$price;
+							}
 									
-								//Rating Calculation
-                                $sql1="SELECT count(review_id) as total FROM user_review WHERE foodid='$foodid' ";
-                                $result1 =  mysqli_query($mysqli,$sql1);
-                                $value1 = mysqli_fetch_assoc($result1);
-                                $total = $value1['total']; //Totel review of this food
+							//Rating Calculation
+                            $sql1="SELECT count(review_id) as total FROM user_review WHERE foodid='$foodid' ";
+                            $result1 =  mysqli_query($mysqli,$sql1);
+                            $value1 = mysqli_fetch_assoc($result1);
+                            $total = $value1['total']; //Totel review of this food
 
-                                $sql1="SELECT sum(rating) as total FROM user_review WHERE foodid='$foodid' ";
-                                $result2 =  mysqli_query($mysqli,$sql1);
-                                $value2 = mysqli_fetch_assoc($result2);
-                                $totalrate = $value2['total']; //Total sum of rating of this food
+                            $sql1="SELECT sum(rating) as total FROM user_review WHERE foodid='$foodid' ";
+                            $result2 =  mysqli_query($mysqli,$sql1);
+                            $value2 = mysqli_fetch_assoc($result2);
+                            $totalrate = $value2['total']; //Total sum of rating of this food
 
-                                if($total==0){
-	                               $Rating="";	
-	                               $place = '<span style="font-size:16px;" class="badge badge-pill badge-danger"> No Review </span>';
-                                }
-                                else{	
-                                    $Rate=$totalrate/$total;
-	                                $Rating=number_format($Rate, 1, '.', '');
+                            if($total==0){
+	                            $Rating="";	
+	                            $place = '<span style="font-size:16px;" class="badge badge-pill badge-danger"> No Review </span>';
+                            }
+                            else{	
+                                $Rate=$totalrate/$total;
+	                            $Rating=number_format($Rate, 1, '.', '');
 	
-	                                if($Rating<3){
-		                                $style="color:red"; 
-	                                }	
-                                    else{ 
-		                                $style="color:green";												
-	                                }
+	                            if($Rating<3){
+		                            $style="color:red"; 
+	                            }	
+                                else{ 
+		                            $style="color:green";												
+	                                
 	
-	                                $place = "<b style=".$style." > ". $Rating ." </b>";
-                                }
+	                            $place = "<b style=".$style." > ". $Rating ." </b>";
+                            }
 
 
-						 ?>
+				?>
                 <!-- single food start -->
                 <div class="row single-ad-item mb-3" style="border-radius:25px">
                     <div class="col-md-12">
-                        <h3 class="item-title"><?php echo $foodname; ?></h3><br>
+                        <!-- food title -->
+                        <h3 class="item-title"><?php echo $foodname; ?></h3><br> 
 
-                        <h5 style="font-family:Calibri;font-size:180%">Category :<b> <?php echo $category;  ?></b> &nbsp Rating : <?php echo $place;?>
-
+                        <h5 style="font-family:Calibri;font-size:180%">Category :<b> <?php echo $category;  ?></b> &nbsp </h5>
+                        <h5>
+                            Rating : <?php echo $place;?>
                             <?php
-								if( (1<$Rating && $Rating<2) || (2<$Rating && $Rating<3) || (3<$Rating && $Rating<4) || (4<$Rating && $Rating<5) ){
-                                    for ($x=1; $x < $Rating; $x++) {?>
-                            <i class="fa fa-star" style="font-size:20px"></i><?php
-   
-                                    }?>
-                            <i class="fas fa-star-half-alt" style="font-size:20px"></i>
-                            <?php	
-								}
-								else{									
-									for ($x=1; $x <= $Rating; $x++) {?>
-                            <i class="fa fa-star" style="font-size:20px"></i><?php
-   
-                                    }
-								}	
-								?>
+							if( (1<$Rating && $Rating<2) || (2<$Rating && $Rating<3) || (3<$Rating && $Rating<4) || (4<$Rating && $Rating<5) ){
+                                for ($x=1; $x < $Rating; $x++) {?>
+                                    <i class="fa fa-star" style="font-size:20px"></i>
+                                <?php 
+                                }?>
 
+                                <i class="fas fa-star-half-alt" style="font-size:20px"></i>
+                            <?php	
+							}
+							else{									
+								for ($x=1; $x <= $Rating; $x++) {?>
+                                    <i class="fa fa-star" style="font-size:20px"></i>
+                                <?php
+                                }
+							}	
+							?>
                         </h5>
 
                         <?php echo $badge;?>
-                        <h5 style="font-family:Calibri;font-size:180%">Available Quantity: <b> <?php echo $quantity; ?> </b> <span style="font-size:16px" class="badge badge-pill badge-<?php  echo $style2;?>"><?php echo $availability;?></span></h5>
-                        <h5 style="font-family:Calibri;font-size:180%">Price :<?php echo $price_style;?> &#2547; <b><?php echo $final_price;?></b></h5>
+                        <h5 style="font-family:Calibri;font-size:180%">
+                            Available Quantity: <b> <?php echo $quantity; ?></b>
+                            <span style="font-size:16px" class="badge badge-pill badge-<?php  echo $style2;?>">
+                                <?php echo $availability;?>
+                            </span>
+                        </h5>
+                        <h5 style="font-family:Calibri;font-size:180%">
+                            Price :<?php echo $price_style;?> &#2547;
+                            <b><?php echo $final_price;?></b>
+                        </h5>
                         <?php
-                        if($offer>0){?>
-                            <h5 style="color:Crimson;font-family: Lucida Handwriting;font-weight:bold">&#9733;&#9733; <?php echo $offer_title;?> &#9733;&#9733;</h5>
 
+                        if($offer>0){?>
+                            <h5 style="color:Crimson;font-family: Lucida Handwriting;font-weight:bold">
+                                <?php echo $offer_title;?>
+                            </h5>
                         <?php
-                        }?>
+                        }
+                        ?>
 
                         <br>
+                        <!-- food image -->
                         <div class="single-item-img p_img">
                             <img id="myImg" src="Admin/<?php echo $image; ?>" alt="<?php echo $foodname ;?>">
                         </div>
                         <br><br>
-
-
                         <div class="row-center">
-
-                            <span class="small mr-3"><a id="hov1" href="addcart.php?insert=<?php echo $foodname ;?>" class="btn btn-warning btn-lg"><i class="fas fa-cart-plus"></i> Add to cart</a></span>
+                            <span class="small mr-3">
+                                <a id="hov1" href="addcart.php?insert=<?php echo $foodname ;?>" class="btn btn-warning btn-lg">
+                                    <i class="fas fa-cart-plus"></i> Add to cart
+                                </a>
+                            </span>
 
                             <?php
-							    if($quantity==0){ //Order is not possible
-								?>
-                            <span class="small mr-3"><a id="not-allowed" href="" class="btn btn-success btn-lg"><i class="fas fa-check-circle"></i> Order now</a></span>
+							if($quantity==0){ //Order is not possible
+							?>
+                            <span class="small mr-3">
+                                <a id="not-allowed" href="" class="btn btn-success btn-lg">
+                                    <i class="fas fa-check-circle"></i> Order now
+                                </a>
+                            </span>
                             <?php
-									echo '<b style="color:red;font-size:16px ">Out of stock  </b>';							
-							    }
-								else{  //Order possible
-									?>
-                            <span class="small mr-3"><a id="hov1" href="order.php?productname=<?php echo $foodname ;?>" class="btn btn-success btn-lg"><i class="fas fa-check-circle"></i> Order now</a></span>
+								echo '<b style="color:red;font-size:16px ">Out of stock  </b>';							
+							}
+							else{  //Order possible
+							?>
+                            <span class="small mr-3">
+                                <a id="hov1" href="order.php?productname=<?php echo $foodname ;?>" class="btn btn-success btn-lg">
+                                    <i class="fas fa-check-circle"></i> Order now
+                                </a>
+                            </span>
 
                             <?php	
 								}	
 				            ?>
 
-
-                            <a id="hov1" href="reviewmodal.php?productname=<?php echo $foodname ;?>" class="pull-right btn btn-primary btn-lg"><i class="fas fa-award"></i> Review</a>
+                            <a id="hov1" href="reviewmodal.php?productname=<?php echo $foodname ;?>" class="pull-right btn btn-primary btn-lg">
+                                <i class="fas fa-award"></i> Review
+                            </a>
 
                         </div>
                         <br>
@@ -246,10 +262,10 @@ session_start();
                     </div>
                 </div>
                 <?php   
-					        }
+					    }
 
-						}
-					?>
+					}
+				?>
 
             </div>
         </div>
@@ -426,7 +442,6 @@ session_start();
                 width: 100%;
             }
         }
-
     </style>
 
 
@@ -438,18 +453,27 @@ session_start();
             <br>
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-4" style="text-align:justify">
-                    <h4 class="pos-relative mb-20 pt-20"><i class="abs-bl icon-box icon-pizza"></i><b class="pl-60">Italian pizza</b></h4>
-                    <p class="mb-30">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
+                    <h4 class="pos-relative mb-20 pt-20"><i class="abs-bl icon-box icon-pizza"></i><b
+                            class="pl-60">Italian pizza</b></h4>
+                    <p class="mb-30">There are many variations of passages of Lorem Ipsum available, but the majority
+                        have suffered alteration in some form, by injected humour, or randomised words which don't look
+                        even slightly believable.</p>
                 </div><!-- col-md-4-->
 
                 <div class="col-sm-12 col-md-6 col-lg-4" style="text-align:justify">
-                    <h4 class="pos-relative mb-20 pt-20"><i class="abs-bl icon-box icon-ingradient"></i><b class="pl-60">Best ingredients</b></h4>
-                    <p class="mb-30">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
+                    <h4 class="pos-relative mb-20 pt-20"><i class="abs-bl icon-box icon-ingradient"></i><b
+                            class="pl-60">Best ingredients</b></h4>
+                    <p class="mb-30">There are many variations of passages of Lorem Ipsum available, but the majority
+                        have suffered alteration in some form, by injected humour, or randomised words which don't look
+                        even slightly believable. </p>
                 </div><!-- col-md-4-->
 
                 <div class="col-sm-12 col-md-6 col-lg-4" style="text-align:justify">
-                    <h4 class="pos-relative mb-20 pt-20"><i class="abs-bl icon-box icon-cshef"></i><b class="pl-60">Top Chefs</b></h4>
-                    <p class="mb-30">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
+                    <h4 class="pos-relative mb-20 pt-20"><i class="abs-bl icon-box icon-cshef"></i><b class="pl-60">Top
+                            Chefs</b></h4>
+                    <p class="mb-30">There are many variations of passages of Lorem Ipsum available, but the majority
+                        have suffered alteration in some form, by injected humour, or randomised words which don't look
+                        even slightly believable. </p>
                 </div><!-- col-md-4-->
             </div><!-- row-->
         </div><!-- container-->
@@ -464,7 +488,7 @@ session_start();
         var img = document.getElementById("myImg");
         var modalImg = document.getElementById("img01");
         var captionText = document.getElementById("caption");
-        img.onclick = function() {
+        img.onclick = function () {
             modal.style.display = "block";
             modalImg.src = this.src;
             captionText.innerHTML = this.alt;
@@ -474,10 +498,9 @@ session_start();
         var span = document.getElementsByClassName("close")[0];
 
         // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
+        span.onclick = function () {
             modal.style.display = "none";
         }
-
     </script>
 
 </body>
