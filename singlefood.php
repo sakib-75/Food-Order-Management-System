@@ -89,93 +89,90 @@ session_start();
                     <?php }?>
                 </ul>
             </div>
+
             <div class="col-md-9">
-                <!-- <h3>Posts</h3> -->
                 <?php 
-					include_once 'connection.php';
+				include_once 'connection.php';
 
-                    if (isset($_GET['productname'])) {
+                if (isset($_GET['productname'])) {
 							
-		                $the_post_id=$_GET['productname'];
-		                $post_edit_query = "SELECT * FROM product WHERE productname = '$the_post_id' ";
-		                $post_edit_query_result = mysqli_query($mysqli,$post_edit_query);
-		                if (!$post_edit_query_result) {
-		                    die("view_add_query_result failed ".mysqli_error($mysqli));
-		                }
+		            $the_post_id=$_GET['productname'];
+		            $post_edit_query = "SELECT * FROM product WHERE productname = '$the_post_id' ";
+		            $post_edit_query_result = mysqli_query($mysqli,$post_edit_query);
+		            if (!$post_edit_query_result) {
+		                die("view_add_query_result failed ".mysqli_error($mysqli));
+		            }
 
-		                while ($row=mysqli_fetch_assoc($post_edit_query_result)) {
+		            while ($row=mysqli_fetch_assoc($post_edit_query_result)) {
 								
-			                $foodid=$row['productid'];
-                            $foodname=$row['productname'];
-							$category=$row['categoryname'];
-							$price=$row['price'];
-							$image=$row['photo'];
-							$quantity=$row['quantity'];
-							$offer=$row['offer'];
-                            $offer_title=$row['offer_title'];
+			            $foodid=$row['productid'];
+                        $foodname=$row['productname'];
+						$category=$row['categoryname'];
+						$price=$row['price'];
+						$image=$row['photo'];
+						$quantity=$row['quantity'];
+						$offer=$row['offer'];
+                        $offer_title=$row['offer_title'];
 								
-							if($quantity>0){
-								$availability="Available";
-								$style2="success";
+						if($quantity>0){
+							$availability="Available";
+							$style2="success";
 									
-							}else{
-								$availability="Not Available";
-								$style2="danger";
-							}
+						}else{
+							$availability="Not Available";
+							$style2="danger";
+						}
 								
-							if($offer>0){
-								$badge='<img style="float: right !important;height:150px;width:150px"src="images/offer.jpg" alt="Mobile">';
+						if($offer>0){
+							$badge='<img style="float: right !important;height:150px;width:150px"src="images/offer.jpg" alt="Mobile">';
 							        
-								$cut=$price*($offer/100);
-							    $final_price=($price-$cut);
-								$price_style =' &#2547; <b style="color:red;text-decoration: line-through;">'.$price.'</b> is now';
-							}
-							else{
-								$badge="";
-								$price_style="";
-							    $final_price=$price;
-							}
+							$cut=$price*($offer/100);
+							$final_price=($price-$cut);
+							$price_style =' &#2547; <b style="color:red;text-decoration: line-through;">'.$price.'</b> is now';
+						}
+						else{
+							$badge="";
+							$price_style="";
+							$final_price=$price;
+						}
 									
-							//Rating Calculation
-                            $sql1="SELECT count(review_id) as total FROM user_review WHERE foodid='$foodid' ";
-                            $result1 =  mysqli_query($mysqli,$sql1);
-                            $value1 = mysqli_fetch_assoc($result1);
-                            $total = $value1['total']; //Totel review of this food
+						//Rating Calculation
+                        $sql1="SELECT count(review_id) as total FROM user_review WHERE foodid='$foodid' ";
+                        $result1 =  mysqli_query($mysqli,$sql1);
+                        $value1 = mysqli_fetch_assoc($result1);
+                        $total = $value1['total']; //Totel review of this food
 
-                            $sql1="SELECT sum(rating) as total FROM user_review WHERE foodid='$foodid' ";
-                            $result2 =  mysqli_query($mysqli,$sql1);
-                            $value2 = mysqli_fetch_assoc($result2);
-                            $totalrate = $value2['total']; //Total sum of rating of this food
+                        $sql1="SELECT sum(rating) as total FROM user_review WHERE foodid='$foodid' ";
+                        $result2 =  mysqli_query($mysqli,$sql1);
+                        $value2 = mysqli_fetch_assoc($result2);
+                        $totalrate = $value2['total']; //Total sum of rating of this food
 
-                            if($total==0){
-	                            $Rating="";	
-	                            $place = '<span style="font-size:16px;" class="badge badge-pill badge-danger"> No Review </span>';
-                            }
-                            else{	
-                                $Rate=$totalrate/$total;
-	                            $Rating=number_format($Rate, 1, '.', '');
+                        if($total==0){
+	                        $Rating="";	
+	                        $place = '<span style="font-size:16px;" class="badge badge-pill badge-danger"> No Review </span>';
+                        }
+                        else{	
+                            $Rate=$totalrate/$total;
+	                        $Rating=number_format($Rate, 1, '.', '');
 	
-	                            if($Rating<3){
-		                            $style="color:red"; 
-	                            }	
-                                else{ 
-		                            $style="color:green";												
-	                                
-	
-	                            $place = "<b style=".$style." > ". $Rating ." </b>";
-                            }
+	                        if($Rating<3){
+		                        $style="color:red"; 
+	                        }	
+                            else{ 
+		                        $style="color:green";												
+	                        }
+	                        $place = "<b style=".$style." > ". $Rating ." </b>";
+                        }
+						?>
 
-
-				?>
                 <!-- single food start -->
                 <div class="row single-ad-item mb-3" style="border-radius:25px">
                     <div class="col-md-12">
                         <!-- food title -->
                         <h3 class="item-title"><?php echo $foodname; ?></h3><br> 
-
-                        <h5 style="font-family:Calibri;font-size:180%">Category :<b> <?php echo $category;  ?></b> &nbsp </h5>
-                        <h5>
-                            Rating : <?php echo $place;?>
+                        <h5 style="font-family:Calibri;font-size:180%">Category :<b> <?php echo $category;  ?></b> </h5>
+                        <h5 style="font-family:Calibri;font-size:180%">
+                            Rating : <b><?php echo $place;?></b>
                             <?php
 							if( (1<$Rating && $Rating<2) || (2<$Rating && $Rating<3) || (3<$Rating && $Rating<4) || (4<$Rating && $Rating<5) ){
                                 for ($x=1; $x < $Rating; $x++) {?>
@@ -238,18 +235,17 @@ session_start();
                                 </a>
                             </span>
                             <?php
-								echo '<b style="color:red;font-size:16px ">Out of stock  </b>';							
+								echo '<b style="color:red;font-size:16px "> Out of stock </b>';							
 							}
 							else{  //Order possible
 							?>
-                            <span class="small mr-3">
-                                <a id="hov1" href="order.php?productname=<?php echo $foodname ;?>" class="btn btn-success btn-lg">
-                                    <i class="fas fa-check-circle"></i> Order now
-                                </a>
-                            </span>
-
+                                <span class="small mr-3">
+                                    <a id="hov1" href="order.php?productname=<?php echo $foodname ;?>" class="btn btn-success btn-lg">
+                                        <i class="fas fa-check-circle"></i> Order now
+                                    </a>
+                                </span>
                             <?php	
-								}	
+							}	
 				            ?>
 
                             <a id="hov1" href="reviewmodal.php?productname=<?php echo $foodname ;?>" class="pull-right btn btn-primary btn-lg">
@@ -262,9 +258,9 @@ session_start();
                     </div>
                 </div>
                 <?php   
-					    }
-
 					}
+
+				}
 				?>
 
             </div>
