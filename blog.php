@@ -223,13 +223,13 @@ while ( $row = mysqli_fetch_assoc( $post_query_result ) ) {
             width: 480px;
             resize: none;
             border-radius: 15px;
-            border: 3px solid grey;
+            border: 2px solid #d3d3d3;
             padding: 15px;
             outline: none;
         }
 
         .msg_box:focus {
-            border: 3px solid #CE5937;
+            border: 2px solid #CE5937;
         }
 
         textarea::-webkit-scrollbar {
@@ -258,16 +258,16 @@ while ( $row = mysqli_fetch_assoc( $post_query_result ) ) {
             outline: none;
             font-weight: bold;
             text-align: center;
+            transition: 0.3s;
 
         }
 
         .submit_button:hover {
             cursor: pointer;
             color: white;
-            border: 2px solid #556B2F;
-            background-color: #556B2F;
-            -webkit-box-shadow: 0px 0px 15px 0px #556B2F;
-            box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.4);
+            border: none;
+            background-color: green;
+            box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.4);
         }
 
         #img {
@@ -281,8 +281,6 @@ while ( $row = mysqli_fetch_assoc( $post_query_result ) ) {
             height: 100px;
             width: 100px;
             border-radius: 50%;
-            border: 2px solid rgba(0, 0, 0, 0.4);
-            box-shadow: 2px 12px 12px 0px rgba(0, 0, 0, 0.4);
         }
 
 
@@ -370,14 +368,12 @@ while ( $row = mysqli_fetch_assoc( $post_query_result ) ) {
 
         .brdr {
             height: 100%;
-            border: 5px solid;
-            border-color: #CE5937;
             border-radius: 20px;
             padding: 30px;
             margin-top: 30px;
-            -webkit-box-shadow: 0px 32px 67px -11px rgba(0, 0, 0, 0.71);
-            -moz-box-shadow: 0px 32px 67px -11px rgba(0, 0, 0, 0.71);
-            box-shadow: 0px 32px 67px -11px rgba(0, 0, 0, 0.71);
+            -webkit-box-shadow: 0px 10px 20px -13px rgba(0, 0, 0, 0.71);
+            -moz-box-shadow: 0px 10px 20px -13px rgba(0, 0, 0, 0.71);
+            box-shadow: 0px 10px 20px -13px rgba(0, 0, 0, 0.71);
         }
 
         .grid-container {
@@ -387,7 +383,7 @@ while ( $row = mysqli_fetch_assoc( $post_query_result ) ) {
             margin-bottom: 20px;
             padding: 15px;
             border-radius: 20px;
-            border: 1px solid rgba(0, 0, 0, 0.4);
+            border: 1px solid #d3d3d3;
         }
 
     </style>

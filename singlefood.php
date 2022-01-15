@@ -149,7 +149,7 @@ session_start();
 
                         if($total==0){
 	                        $Rating="";	
-	                        $place = '<span style="font-size:16px;" class="badge badge-pill badge-danger"> No Review </span>';
+	                        $place = '<span style="font-size:14px;" class="badge badge-pill badge-danger"> No Review </span>';
                         }
                         else{	
                             $Rate=$totalrate/$total;
@@ -170,8 +170,8 @@ session_start();
                     <div class="col-md-12">
                         <!-- food title -->
                         <h3 class="item-title"><?php echo $foodname; ?></h3><br> 
-                        <h5 style="font-family:Calibri;font-size:180%">Category :<b> <?php echo $category;  ?></b> </h5>
-                        <h5 style="font-family:Calibri;font-size:180%">
+                        <h5 class="item-details">Category :<b> <?php echo $category;  ?></b> </h5>
+                        <h5 class="item-details">
                             Rating : <b><?php echo $place;?></b>
                             <?php
 							if( (1<$Rating && $Rating<2) || (2<$Rating && $Rating<3) || (3<$Rating && $Rating<4) || (4<$Rating && $Rating<5) ){
@@ -193,13 +193,13 @@ session_start();
                         </h5>
 
                         <?php echo $badge;?>
-                        <h5 style="font-family:Calibri;font-size:180%">
+                        <h5 class="item-details">
                             Available Quantity: <b> <?php echo $quantity; ?></b>
-                            <span style="font-size:16px" class="badge badge-pill badge-<?php  echo $style2;?>">
+                            <span style="font-size:14px" class="badge badge-pill badge-<?php  echo $style2;?>">
                                 <?php echo $availability;?>
                             </span>
                         </h5>
-                        <h5 style="font-family:Calibri;font-size:180%">
+                        <h5 class="item-details">
                             Price :<?php echo $price_style;?> &#2547;
                             <b><?php echo $final_price;?></b>
                         </h5>
@@ -284,13 +284,16 @@ session_start();
 
         body {
             text-rendering: optimizeLegibility;
-
         }
 
         #item {
             font-size: 1.1rem;
         }
 
+        .item-details{
+            font-size: 20px;
+            margin: 5px 0px;
+        }
 
         #not-allowed {
             cursor: not-allowed;
@@ -298,29 +301,22 @@ session_start();
         }
 
         #hov:hover {
-
-            -webkit-box-shadow: 0px 0px 15px 0px red;
-            box-shadow: 0px 0px 15px 0px red;
-
+            -webkit-box-shadow: 0px 0px 10px 0px red;
+            box-shadow: 0px 0px 10px 0px red;
         }
 
         #hov {
-
             border-radius: 25px;
-
+            margin-bottom: 15px;
         }
 
         #hov1:hover {
-
             -webkit-box-shadow: 0px 0px 10px 0px black;
             box-shadow: 0px 0px 10px 0px black;
-
         }
 
         #hov1 {
-
             border-radius: 25px;
-
         }
 
         #myImg {

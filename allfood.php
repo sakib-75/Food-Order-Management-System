@@ -93,16 +93,13 @@
         }
 
         #hov:hover {
-
-            -webkit-box-shadow: 0px 0px 15px 0px red;
-            box-shadow: 0px 0px 15px 0px red;
-
+            -webkit-box-shadow: 0px 0px 10px 0px red;
+            box-shadow: 0px 0px 10px 0px red;
         }
 
         #hov {
-
             border-radius: 25px;
-
+            margin-bottom: 15px;
         }
 
         #offer-img {
