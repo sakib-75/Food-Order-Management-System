@@ -117,8 +117,6 @@ $food_id= $row['productid'];
         height: 70px;
         width: 70px;
         border-radius: 50%;
-        border: 2px solid rgba(0, 0, 0, 0.4);
-
     }
 
     .grid-container {
@@ -128,7 +126,7 @@ $food_id= $row['productid'];
         margin-bottom: 20px;
         padding: 5px;
         border-radius: 20px;
-        border: 1px solid rgba(0, 0, 0, 0.4);
+        border: 1px solid #d3d3d3;
     }
 
 

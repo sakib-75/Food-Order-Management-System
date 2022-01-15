@@ -29,13 +29,13 @@ $postid= $row['postid'];
                         <div class="mb-50 mb-sm-30">
                             <div style="margin:auto">
                                 <!-- post image-->
-                                <img src="<?php echo $row['image'];; ?>" id="img" alt="<?php echo $row['foodname']; ?>">
+                                <img src="<?php echo $row['image']; ?>" id="img" alt="food image">
                             </div>
                             <div class="brdr">
                                 <h4><b><?php echo $row['title'];; ?></b></h4>
                                 <h5 class="mt-10 bg-lite-blue dplay-inl-block">
 
-                                    <i class="far fa-comment-dots"></i> <span id="count-number"><?php echo $totalcomment; ?> </span> Comments ||
+                                    <i class="far fa-comment-dots"></i> <span id="count-number"><?php echo $totalcomment; ?> </span> Comments |
                                     <i class="far fa-calendar-alt"></i> Date: <?php echo $row['date']; ?>
 
                                 </h5>
@@ -142,8 +142,6 @@ $postid= $row['postid'];
         height: 70px;
         width: 70px;
         border-radius: 50%;
-        border: 2px solid rgba(0, 0, 0, 0.4);
-
     }
 
     .grid-container {
@@ -153,7 +151,7 @@ $postid= $row['postid'];
         margin-bottom: 20px;
         padding: 5px;
         border-radius: 20px;
-        border: 1px solid rgba(0, 0, 0, 0.4);
+        border: 1px solid #d3d3d3;
     }
 
 
@@ -174,13 +172,11 @@ $postid= $row['postid'];
     }
 
     .brdr {
-        border: 2px solid;
-        border-color: #CE5937;
         border-radius: 20px;
         padding: 15px;
         margin-top: 30px;
-        -webkit-box-shadow: 0px 0px 15px 0px grey;
-        box-shadow: 0px 0px 15px 0px grey;
+        -webkit-box-shadow: 0px 0px 8px 0px #d3d3d3;
+        box-shadow: 0px 0px 8px 0px #d3d3d3;
     }
 
 </style>

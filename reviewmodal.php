@@ -265,9 +265,6 @@ if($totalrate==0){
             margin-top: 10px;
             float: left;
             border-radius: 30px;
-            -webkit-box-shadow: 0px 32px 67px -11px rgba(0, 0, 0, 0.71);
-            -moz-box-shadow: 0px 32px 67px -11px rgba(0, 0, 0, 0.71);
-            box-shadow: 0px 32px 67px -11px rgba(0, 0, 0, 0.71);
         }
 
         .review-body h4 {
@@ -279,10 +276,11 @@ if($totalrate==0){
             margin: 15px auto;
             outline: none;
             display: block;
+            transition: 0.3s;
         }
 
         #review-btn:hover {
-            background-color: darkolivegreen;
+            background-color: green;
         }
 
         .progress-body {
@@ -337,7 +335,7 @@ if($totalrate==0){
         <div class="review-body">
             <h4><b>Rate and Reviews</b></h4>
             <h4><?php echo $Rating;?> <i class="fa fa-star"></i></h4>
-            <h4><i class="fas fa-user"></i> <?php echo $total;?> total reviews</h4>
+            <h4><i class="fas fa-user"></i> <?php echo $total;?> reviews</h4>
             <button id="review-btn" type="button" class=" btn btn-primary btn-lg" data-toggle="modal" data-target="#reviewmodal">Write review </button>
 
         </div>
@@ -467,61 +465,59 @@ if($totalrate==0){
     <div class="container">
         <div class="content col-sm-12 col-xs-12" style=" background-color:#f6f5f3;">
             <?php
-				//query for view review 
-				        $foodname= $_GET['productname'];
+			//query for view review 
+			$foodname= $_GET['productname'];
 						
-				 	    $view_post_query = "SELECT * FROM user_review WHERE foodid= '$foodid' ORDER BY review_id DESC";
-						$view_post_query_result = mysqli_query($mysqli,$view_post_query);
-						if (!$view_post_query_result) {
-							die("view_add_query_result failed ".mysqli_error($mysqli));
-						}
-					if (mysqli_num_rows($view_post_query_result)==0){?>
+			$view_post_query = "SELECT * FROM user_review WHERE foodid= '$foodid' ORDER BY review_id DESC";
+			$view_post_query_result = mysqli_query($mysqli,$view_post_query);
+			if (!$view_post_query_result) {
+				die("view_add_query_result failed ".mysqli_error($mysqli));
+			}
+			if (mysqli_num_rows($view_post_query_result)==0){?>
 
             <br>
             <h3 style='color:red' class="text-center"><b>No Review Available</b></h3><br>
 
             <?php
-					}
-                    else{					
+			}
+            else{					
 		
-                        ?><h2 class="text-center">All user review <b style="color:#ff6600">(<?php echo $foodname?>)</b></h2><br><?php
-						while ($row=mysqli_fetch_assoc($view_post_query_result)) {
+                ?><h2 class="text-center">All user review <b style="color:#ff6600">(<?php echo $foodname?>)</b></h2><br><?php
+				while ($row=mysqli_fetch_assoc($view_post_query_result)) {
                             
-							    $review_id=$row['review_id'];
-							    $username=$row['username'];
-								$review=$row['review'];
-								$rate=$row['rating'];
-								$rating=number_format($rate, 1, '.', '');
+					$review_id=$row['review_id'];
+					$username=$row['username'];
+					$review=$row['review'];
+					$rate=$row['rating'];
+					$rating=number_format($rate, 1, '.', '');
 								
-								$user_photo= $row['userimage'];
-								$date= $row['date'];
+					$user_photo= $row['userimage'];
+					$date= $row['date'];
 								
-								if($rating<3){
-									$style="color:red"; 
-								}
-                                else{ 
-									$style="color:green";												
-								}
+					if($rating<3){
+						$style="color:red"; 
+					}
+                    else{ 
+						$style="color:green";												
+					}
                                 
-                                if($review_id==$pid){
-                                    if($_SESSION['id']==1){
-                                        $select='id="select-update"';
-                                        $img_select='id="img_select"';
-                                    }else{
-                                        $select="";
-                                        $img_select="";
-                                    }
+                    if($review_id==$pid){
+                        if($_SESSION['id']==1){
+                            $select='id="select-update"';
+                            $img_select='id="img_select"';
+                        }else{
+                            $select="";
+                            $img_select="";
+                        }
                                     
-                                }else{
-                                    $select="";
-                                    $img_select="";
-                                }
+                    }else{
+                        $select="";
+                        $img_select="";
+                    }
                             
+                    ?>
 
-								
-								
 
-							?>
             <div class="sided-90x mb-30" <?php echo $select;?>>
 
                 <div class="s-left" <?php echo $img_select;?>>
@@ -552,10 +548,10 @@ if($totalrate==0){
             <hr /><br>
 
             <?php
-						}
-					}
+				}
+			}
 				    
-				 ?>
+			?>
 
         </div>
     </div><!-- container -->

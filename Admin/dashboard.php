@@ -5,17 +5,14 @@ include('conn.php');
 if (strlen($_SESSION['ccmsaid']==0)) {
   header('location:logout.php');
   } 
-     ?>
+?>
 
 <!doctype html>
 <html class="no-js" lang="en">
 
 <head>
-
     <title>Admin Dashboard</title>
-
     <link rel="apple-touch-icon" href="apple-icon.png">
-
 
     <link rel="stylesheet" href="dashboardcss/vendors/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="dashboardcss/vendors/font-awesome/css/font-awesome.min.css">
@@ -26,7 +23,6 @@ if (strlen($_SESSION['ccmsaid']==0)) {
 
 
     <link rel="stylesheet" href="dashboardcss/assets/css/style.css">
-
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
 </head>
@@ -58,17 +54,14 @@ if (strlen($_SESSION['ccmsaid']==0)) {
                     </div>
                 </div>
             </div>
-
         </div>
 
         <div class="content mt-3">
 
             <style>
                 #hov:hover {
-
-                    -webkit-box-shadow: 0px 0px 20px 0px #000000;
-                    box-shadow: 0px 0px 20px 0px #000000;
-
+                    -webkit-box-shadow: 0px 0px 10px 0px #000000;
+                    box-shadow: 0px 0px 10px 0px #000000;
                 }
 
             </style>
