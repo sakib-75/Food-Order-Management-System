@@ -16,3 +16,8 @@ Online food ordering system with admin panel using JavaScript, PHP &amp; MySQL
 
 ### Food Profile
 ![food profile](https://github.com/sakib-75/food-order-system/blob/main/images/foodprofile-screenshot.png)
+
+<br><br>
+
+### Admin Dashboard
+![admin dashboard](https://github.com/sakib-75/food-order-system/blob/main/images/adminpage-screenshot.png)
