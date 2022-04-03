@@ -1,4 +1,4 @@
-# food-order-system
+# Food Order Management System
 Online food ordering system with admin panel using JavaScript, PHP &amp; MySQL
 
 ### See Live
